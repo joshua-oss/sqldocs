@@ -1,5 +1,5 @@
 root := ../../smartnoise-sdk/sdk/opendp/smartnoise/
-targets := Query Logical Numeric QueryParser PrivateReader SqlReader Rewriter Validate
+targets := Query Logical Numeric QueryParser PrivateReader Expression SqlExpression SqlReader Rewriter Validate Tokens
 
 define generate_all
 	pyreverse -o eps -S -A -m y $(addsuffix $(strip $(2)),$(root))  && mv classes.eps $(1).eps
@@ -32,6 +32,15 @@ Validate:
 
 Query:
 	$(call generate_all, Query, _ast/ast.py)
+
+Tokens:
+	$(call generate_all, Tokens, _ast/tokens.py)
+
+Expression:
+	$(call generate_all, Expression, _ast/expression.py)
+
+SqlExpression:
+	$(call generate_all, SqlExpression, _ast/expressions/sql.py)
 
 Logical:
 	$(call generate_all, Logical, _ast/expressions/logical.py)
